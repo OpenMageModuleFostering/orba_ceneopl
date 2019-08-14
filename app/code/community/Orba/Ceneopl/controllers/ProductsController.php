@@ -9,7 +9,6 @@ class Orba_Ceneopl_ProductsController extends Mage_Core_Controller_Front_Action 
         $hash = $this->getRequest()->getParam('hash');
         if ($hash == $this->getConfig()->getHash()) {
             ini_set('max_execution_time', 0);
-            header("Content-Type:text/xml");
             require_once(Mage::getBaseDir('lib').'/Ceneopl/simple_xml_extended.php');
             $offers = Mage::getModel('ceneopl/product')->getOffers();
             $xml = new SimpleXMLExtended('<?xml version="1.0" encoding="utf-8"?><offers xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1" />');
@@ -50,8 +49,11 @@ class Orba_Ceneopl_ProductsController extends Mage_Core_Controller_Front_Action 
                     }
                 }
             }
-            echo $xml->asXML();
-            die();
+            $this->getResponse()
+                ->setHeader('Content-Type', 'text/xml')
+                ->setBody($xml->asXML())
+                ->sendResponse();
+            exit;
         } else {
             $this->_redirect('/');
         }
