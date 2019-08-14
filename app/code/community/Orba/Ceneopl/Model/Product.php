@@ -2,6 +2,11 @@
 
 class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
 
+    /**
+     * @var Ceneopl_Varien_Image
+     */
+    protected $_imageObj;
+
     protected function getConfig() {
         return Mage::getModel('ceneopl/config');
     }
@@ -236,21 +241,27 @@ class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
         $imageResizedDir = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA)
             . DS . "catalog" . DS . "product" . DS . "ceneopl";
         $imagesBaseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'catalog/product';
-
+        if (is_null($this->_imageObj)) {
+            $this->_imageObj = new Ceneopl_Varien_Image();
+        }
         if (file_exists($imageDir . $imageFile)) {
-            $imageObj = new Varien_Image($imageDir . $imageFile);
-            $width = $imageObj->getOriginalWidth();
-            $height = $imageObj->getOriginalHeight();
-            if ($width > 2000 || $height > 2000) {
-                if (!file_exists($imageResizedDir . $imageFile)) {
-                    $imageObj->constrainOnly(true);
-                    $imageObj->keepAspectRatio(true);
-                    $imageObj->keepFrame(false);
-                    $imageObj->resize(2000, 2000);
-                    $imageObj->save($imageResizedDir . $imageFile);
-                    Mage::log('Image resized for Ceneo feed: ' . $imageFile, null,'ceneopl.log');
+            try {
+                $this->_imageObj->reload($imageDir . $imageFile);
+                $width = $this->_imageObj->getOriginalWidth();
+                $height = $this->_imageObj->getOriginalHeight();
+                if ($width > 2000 || $height > 2000) {
+                    if (!file_exists($imageResizedDir . $imageFile)) {
+                        $this->_imageObj->constrainOnly(true);
+                        $this->_imageObj->keepAspectRatio(true);
+                        $this->_imageObj->keepFrame(false);
+                        $this->_imageObj->resize(2000, 2000);
+                        $this->_imageObj->save($imageResizedDir . $imageFile);
+                        Mage::log('Image resized for Ceneo feed: ' . $imageFile, null, 'ceneopl.log');
+                    }
+                    $imagesBaseUrl .= '/ceneopl';
                 }
-                $imagesBaseUrl .= '/ceneopl';
+            } catch (Exception $e) {
+                Mage::log('Problem with image file (' . $e->getMessage() . '): ' . $imageFile, null, 'ceneopl.log');
             }
         }
         return $imagesBaseUrl . $imageFile;
