@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <catalog>
+            <children>
+                <ceneopl translate="title" module="ceneopl">
+                    <title>ORBA | Ceneo.pl</title>
+                    <children>
+                        <index translate="title" module="ceneopl">
+                            <title>Offer</title>
+                            <action>ceneopl/adminhtml_offer/index</action>
+                        </index>
+                        <mappings translate="title" module="ceneopl">
+                            <title>Mass Categories Mapping</title>
+                            <action>ceneopl/adminhtml_mapping/index</action>
+                        </mappings>
+                        <feed_url translate="title" module="ceneopl">
+                            <title>Feed URLs</title>
+                            <action>ceneopl/adminhtml_offer/urls</action>
+                        </feed_url>
+                        <config translate="title" module="ceneopl">
+                            <title>Configuration</title>
+                            <action>adminhtml/system_config/edit/section/ceneopl</action>
+                        </config>
+                    </children>
+                    <sort_order>280</sort_order>
+                </ceneopl>
+            </children>
+        </catalog>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <ceneopl translate="title" module="ceneopl">
+                                <title>ORBA | Ceneo.pl</title>
+                                <sort_order>280</sort_order>
+                                <children>
+                                    <index translate="title" module="ceneopl">
+                                        <title>Offer</title>
+                                        <sort_order>10</sort_order>
+                                    </index>
+                                    <mappings translate="title" module="ceneopl">
+                                        <title>Mass Categories Mapping</title>
+                                        <sort_order>20</sort_order>
+                                    </mappings>
+                                    <feed_url translate="title" module="ceneopl">
+                                        <title>Feed URLs</title>
+                                        <sort_order>30</sort_order>
+                                    </feed_url>
+                                </children>
+                            </ceneopl>
+                        </children>
+                    </catalog>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

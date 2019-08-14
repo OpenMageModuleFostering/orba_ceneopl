@@ -1,0 +1,16 @@
+{
+    "name": "OpenMageModuleFostering/Orba_Ceneopl",
+    "type": "magento-module",
+    "license": "Academic-Free-License-(AFL)",
+    "homepage": "",
+    "description": "The extension integrates your store with Ceneo.pl platform.",
+    "authors": [
+    {
+        "name": "ORBA",
+        "email": "magento@orba.pl"
+    }
+],
+    "suggest": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}
