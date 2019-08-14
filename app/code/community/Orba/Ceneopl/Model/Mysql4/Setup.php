@@ -1,7 +1,8 @@
 <?php
-class Orba_Ceneopl_Model_Mysql4_Setup extends Mage_Core_Model_Resource_Setup {
+class Orba_Ceneopl_Model_Mysql4_Setup extends Mage_Core_Model_Resource_Setup
+{
     
-    const ORBA_EMAIL	= 'magento@orba.pl';
+    const ORBA_EMAIL	= 'magento@orba.co';
     const MODULE_NAME	= 'Ceneo.pl';
 
     public function sendPing($version, $upgrade = false) {

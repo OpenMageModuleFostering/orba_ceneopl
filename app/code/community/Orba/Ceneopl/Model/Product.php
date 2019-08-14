@@ -47,7 +47,6 @@ class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
         $offers = array('other' => array());
         $_stock = Mage::getModel('cataloginventory/stock_item');
         $_category = Mage::getModel('ceneopl/category');
-        $images_url = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'catalog/product';
         foreach ($product_collection as $product) {
             if ($product->isVisibleInSiteVisibility() && $product->isVisibleInCatalog()) {
                 $core_attrs = array();
@@ -116,7 +115,7 @@ class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
                 $images = (isset($media_gallery['images'])) ? $media_gallery['images'] : array();
                 $i = 0;
                 foreach ($images as $image) {
-                    $imgs[] = $images_url . $image['file'];
+                    $imgs[] = $this->_getImageUrl($image['file']);
                     if ($i == 1) {
                         break;
                     }
@@ -223,6 +222,38 @@ class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
 
     public function getFinalPriceIncludingTax($product) {
         return Mage::helper('tax')->getPrice($product, $product->getFinalPrice(), 2);
+    }
+
+    /**
+     * Resize image if it's too big (Ceneo accepts max 2000 x 2000 px) and returns its URL.
+     *
+     * @param string $imageFile
+     * @return string
+     */
+    protected function _getImageUrl($imageFile)
+    {
+        $imageDir = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA) . DS . "catalog" . DS . "product";
+        $imageResizedDir = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA)
+            . DS . "catalog" . DS . "product" . DS . "ceneopl";
+        $imagesBaseUrl = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'catalog/product';
+
+        if (file_exists($imageDir . $imageFile)) {
+            $imageObj = new Varien_Image($imageDir . $imageFile);
+            $width = $imageObj->getOriginalWidth();
+            $height = $imageObj->getOriginalHeight();
+            if ($width > 2000 || $height > 2000) {
+                if (!file_exists($imageResizedDir . $imageFile)) {
+                    $imageObj->constrainOnly(true);
+                    $imageObj->keepAspectRatio(true);
+                    $imageObj->keepFrame(false);
+                    $imageObj->resize(2000, 2000);
+                    $imageObj->save($imageResizedDir . $imageFile);
+                    Mage::log('Image resized for Ceneo feed: ' . $imageFile, null,'ceneopl.log');
+                }
+                $imagesBaseUrl .= '/ceneopl';
+            }
+        }
+        return $imagesBaseUrl . $imageFile;
     }
 
 }
