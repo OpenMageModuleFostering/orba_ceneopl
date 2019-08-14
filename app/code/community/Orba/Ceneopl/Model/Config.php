@@ -1,12 +1,13 @@
 <?php
 class Orba_Ceneopl_Model_Config extends Mage_Core_Model_Abstract {
-    
+
+    const CACHE_GROUP = 'CENEOPL';
+    const AVAIL_DEFAULT_VALUE = 99;
+
     public static $groups = array(
         'core' => array('avail', 'set', 'basket'),
         'other' => array('Producent', 'Kod_producenta', 'EAN')
     );
-    
-    const AVAIL_DEFAULT_VALUE = 99;
 
     public function _construct() {
         $this->_init('ceneopl/config');

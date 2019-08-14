@@ -14,6 +14,6 @@ $installer->getConnection()->changeColumn(
     )
 );
 
-$this->sendPing('1.0.0');
+$this->sendPing('1.0.0', true);
 
 $installer->endSetup();

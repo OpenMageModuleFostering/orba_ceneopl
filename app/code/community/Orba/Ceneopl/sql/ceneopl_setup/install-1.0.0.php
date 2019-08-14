@@ -69,7 +69,7 @@ $installer->getConnection()->createTable($mappingTable);
 
 $mappingCatalogCategoryTableName = $this->getTable('ceneopl/mapping_catalog_category');
 $mappingCatalogCategoryTable = $installer->getConnection()
-    ->newTable($mappingTableName)
+    ->newTable($mappingCatalogCategoryTableName)
     ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
         'identity'  => true,
         'unsigned'	=> true,
@@ -95,8 +95,8 @@ $mappingCatalogCategoryTable = $installer->getConnection()
         'mapping_id', $installer->getTable('ceneopl/mapping'), 'id',
         Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
     ->addForeignKey(
-        $installer->getFkName('ceneopl/mapping_catalog_category', 'category_id', 'catalog/category_entity', 'entity_id'),
-        'category_id', $installer->getTable('catalog/category_entity'), 'entity_id',
+        $installer->getFkName('ceneopl/mapping_catalog_category', 'category_id', 'catalog/category', 'entity_id'),
+        'category_id', $installer->getTable('catalog/category'), 'entity_id',
         Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
 $installer->getConnection()->createTable($mappingCatalogCategoryTable);
 

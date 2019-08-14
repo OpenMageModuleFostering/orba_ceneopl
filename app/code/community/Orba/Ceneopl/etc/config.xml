@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Orba_Ceneopl>
-            <version>1.0.0</version>
+            <version>1.0.1.1</version>
         </Orba_Ceneopl>
     </modules>
     <frontend>
@@ -84,6 +84,15 @@
                 <class>Orba_Ceneopl_Helper</class>
             </ceneopl>
         </helpers>
+        <cache>
+            <types>
+                <ceneopl module="ceneopl" translate="label description">
+                    <label>Ceneo.pl</label>
+                    <description>Ceneo.pl resources</description>
+                    <tags>CENEOPL</tags>
+                </ceneopl>
+            </types>
+        </cache>
     </global>
     <default>
         <ceneopl>

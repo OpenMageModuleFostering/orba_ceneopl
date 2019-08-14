@@ -11,23 +11,23 @@ class Orba_Ceneopl_Model_Category extends Mage_Core_Model_Abstract {
     
     public function getAllOptions($flat = true, $empty = true) {
         if ($flat) {
-            $cache_id = 'ceneo_categories_option_array_flat';
+            $cache_id = 'ceneopl_categories_option_array_flat';
             if (false !== ($data = Mage::app()->getCache()->load($cache_id))) {
                 $options = unserialize($data);
             } else {
                 $options = $this->getFlatTree();
-                Mage::app()->getCache()->save(serialize($options), $cache_id);
+                Mage::app()->getCache()->save(serialize($options), $cache_id, array(Orba_Ceneopl_Model_Config::CACHE_GROUP));
             }
             if ($empty) {
                 $options = array_merge(array(array('label' => '', 'value' => '')), $options);
             }
         } else {
-            $cache_id = 'ceneo_categories_option_array_tree';
+            $cache_id = 'ceneopl_categories_option_array_tree';
             if (false !== ($data = Mage::app()->getCache()->load($cache_id))) {
                 $options = unserialize($data);
             } else {
                 $options = $this->getTree();
-                Mage::app()->getCache()->save(serialize($options), $cache_id);
+                Mage::app()->getCache()->save(serialize($options), $cache_id, array(Orba_Ceneopl_Model_Config::CACHE_GROUP));
             }
         }
         return $options;
@@ -156,6 +156,10 @@ class Orba_Ceneopl_Model_Category extends Mage_Core_Model_Abstract {
             }
         }
         return null;
+    }
+
+    public function clearCache() {
+        Mage::app()->getCache()->load($cache_id);
     }
     
 }
