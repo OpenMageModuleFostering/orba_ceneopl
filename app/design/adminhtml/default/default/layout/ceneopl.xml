@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <layout>
-    <ceneopl_adminhtml_offer_index>
+    <adminhtml_ceneopl_offer_index>
         <reference name="menu">
             <action method="setActive"><menupath>catalog/ceneopl</menupath></action>
         </reference>
@@ -11,23 +11,23 @@
                 </block>
             </block>
         </reference>
-    </ceneopl_adminhtml_offer_index>
-    <ceneopl_adminhtml_offer_urls>
+    </adminhtml_ceneopl_offer_index>
+    <adminhtml_ceneopl_offer_urls>
         <reference name="content">
             <block type="ceneopl/admin_offer_urls" name="offer_urls" />
         </reference>
-    </ceneopl_adminhtml_offer_urls>
-    <ceneopl_adminhtml_mapping_index>
+    </adminhtml_ceneopl_offer_urls>
+    <adminhtml_ceneopl_mapping_index>
         <reference name="menu">
             <action method="setActive"><menupath>catalog/ceneopl</menupath></action>
         </reference>
         <reference name="content">
             <block type="ceneopl/admin_mapping" name="ceneopl_mapping" />
         </reference>
-    </ceneopl_adminhtml_mapping_index>
-    <ceneopl_adminhtml_mapping_edit>
+    </adminhtml_ceneopl_mapping_index>
+    <adminhtml_ceneopl_mapping_edit>
         <reference name="content">
             <block type="ceneopl/admin_mapping_edit" name="mapping_edit" template="ceneopl/mapping/edit.phtml" />
         </reference>
-    </ceneopl_adminhtml_mapping_edit>
+    </adminhtml_ceneopl_mapping_edit>
 </layout>

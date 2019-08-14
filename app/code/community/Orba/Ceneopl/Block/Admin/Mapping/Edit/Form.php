@@ -31,7 +31,6 @@ class Orba_Ceneopl_Block_Admin_Mapping_Edit_Form extends Mage_Adminhtml_Block_Wi
             'name' => 'ceneo_category_id',
             'label' => Mage::helper('ceneopl')->__('Ceneo Category'),
             'title' => Mage::helper('ceneopl')->__('Ceneo Category'),
-            'required' => true,
             'value' => $model->getCeneoCategoryId(),
             'options' => $ceneo_categories
         ));

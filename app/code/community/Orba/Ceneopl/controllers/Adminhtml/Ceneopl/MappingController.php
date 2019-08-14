@@ -1,9 +1,10 @@
 <?php
-class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller_Action {
-	
-    protected function _initAction() {
-		return $this;
-	}
+class Orba_Ceneopl_Adminhtml_Ceneopl_MappingController extends Mage_Adminhtml_Controller_Action {
+
+    protected function _isAllowed() {
+        $session = Mage::getSingleton('admin/session');
+        return $session->isAllowed('catalog/ceneopl/mapping_index');
+    }
 
 	public function indexAction() {
         $this->_title($this->__('Catalog'))
@@ -46,6 +47,9 @@ class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller
     }
     
     public function saveAction () {
+        /**
+         * @var $mapping Orba_Ceneopl_Model_Mapping
+         */
         $request = $this->getRequest();
         if (!$request->isPost()) {
             $this->getResponse()->setRedirect($this->getUrl('*/mapping'));
@@ -57,6 +61,9 @@ class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller
         $redirected = false;
         try {
             $mapping->addData($request->getParams());
+            if (!$mapping->getData('ceneo_category_id')) {
+                $mapping->setData('ceneo_category_id', null);
+            }
             $mapping->save();
             $mapping->saveCatalogCategories();
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('ceneopl')->__('The mapping has been saved.'));
@@ -73,6 +80,9 @@ class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller
     }
 
     public function deleteAction() {
+        /**
+         * @var $mapping Orba_Ceneopl_Model_Mapping
+         */
         $mapping = Mage::getModel('ceneopl/mapping')
             ->load($this->getRequest()->getParam('id'));
         if ($mapping->getId()) {
@@ -95,6 +105,10 @@ class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller
     }
     
     protected function run($mapping) {
+        /**
+         * @var $mapping Orba_Ceneopl_Model_Mapping
+         * @var $product Orba_Ceneopl_Model_Product
+         */
         if ($mapping->getId()) {
             $mapping->setCatalogCategoriesIds();
             $category_ids = $mapping->getCatalogCategoriesIds();
@@ -109,6 +123,9 @@ class Orba_Ceneopl_Adminhtml_MappingController extends Mage_Adminhtml_Controller
     }
     
     public function runAction() {
+        /**
+         * @var $mapping Orba_Ceneopl_Model_Mapping
+         */
         ini_set('max_execution_time', 0);
         $mapping = Mage::getModel('ceneopl/mapping')
             ->unsetData()

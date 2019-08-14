@@ -1,9 +1,10 @@
 <?php
-class Orba_Ceneopl_Adminhtml_OfferController extends Mage_Adminhtml_Controller_Action {
-	
-    protected function _initAction() {
-		return $this;
-	}
+class Orba_Ceneopl_Adminhtml_Ceneopl_OfferController extends Mage_Adminhtml_Controller_Action {
+
+    protected function _isAllowed() {
+        $session = Mage::getSingleton('admin/session');
+        return $session->isAllowed('catalog/ceneopl/offer_' . $this->getRequest()->getActionName());
+    }
 
 	public function indexAction() {
         $this->_title($this->__('Catalog'))

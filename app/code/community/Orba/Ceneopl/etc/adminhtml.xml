@@ -6,18 +6,18 @@
                 <ceneopl translate="title" module="ceneopl">
                     <title>ORBA | Ceneo.pl</title>
                     <children>
-                        <index translate="title" module="ceneopl">
+                        <offer_index translate="title" module="ceneopl">
                             <title>Offer</title>
-                            <action>ceneopl/adminhtml_offer/index</action>
-                        </index>
-                        <mappings translate="title" module="ceneopl">
+                            <action>adminhtml/ceneopl_offer/index</action>
+                        </offer_index>
+                        <mapping_index translate="title" module="ceneopl">
                             <title>Mass Categories Mapping</title>
-                            <action>ceneopl/adminhtml_mapping/index</action>
-                        </mappings>
-                        <feed_url translate="title" module="ceneopl">
+                            <action>adminhtml/ceneopl_mapping/index</action>
+                        </mapping_index>
+                        <offer_urls translate="title" module="ceneopl">
                             <title>Feed URLs</title>
-                            <action>ceneopl/adminhtml_offer/urls</action>
-                        </feed_url>
+                            <action>adminhtml/ceneopl_offer/urls</action>
+                        </offer_urls>
                         <config translate="title" module="ceneopl">
                             <title>Configuration</title>
                             <action>adminhtml/system_config/edit/section/ceneopl</action>
@@ -38,18 +38,18 @@
                                 <title>ORBA | Ceneo.pl</title>
                                 <sort_order>280</sort_order>
                                 <children>
-                                    <index translate="title" module="ceneopl">
+                                    <offer_index translate="title" module="ceneopl">
                                         <title>Offer</title>
                                         <sort_order>10</sort_order>
-                                    </index>
-                                    <mappings translate="title" module="ceneopl">
+                                    </offer_index>
+                                    <mapping_index translate="title" module="ceneopl">
                                         <title>Mass Categories Mapping</title>
                                         <sort_order>20</sort_order>
-                                    </mappings>
-                                    <feed_url translate="title" module="ceneopl">
+                                    </mapping_index>
+                                    <offer_urls translate="title" module="ceneopl">
                                         <title>Feed URLs</title>
                                         <sort_order>30</sort_order>
-                                    </feed_url>
+                                    </offer_urls>
                                 </children>
                             </ceneopl>
                         </children>
