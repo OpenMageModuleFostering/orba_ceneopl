@@ -14,7 +14,7 @@ class Orba_Ceneopl_Block_Admin_Offer_Urls_Grid extends Mage_Adminhtml_Block_Widg
     
     protected function _prepareCollection(){
         $collection = Mage::getModel('core/store')->getCollection();
-        foreach ($collection as &$item) {
+        foreach ($collection as $item) {
             $item->setCeneoUrl($item->getUrl('ceneopl/products/feed', array('hash' => $this->getConfig()->getHash())));
         }
         $this->setCollection($collection);
