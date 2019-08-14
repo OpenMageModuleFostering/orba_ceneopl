@@ -21,4 +21,17 @@ class Ceneopl_Varien_Image extends Varien_Image
             $this->open();
         }
     }
+
+    /**
+     * Retrieve overwritten image adapter object.
+     * @param string $adapter
+     * @return Varien_Image_Adapter_Abstract
+     */
+    protected function _getAdapter($adapter=null)
+    {
+        if( !isset($this->_adapter) ) {
+            $this->_adapter = new Ceneopl_Varien_Image_Adapter_Gd2();
+        }
+        return $this->_adapter;
+    }
 }
