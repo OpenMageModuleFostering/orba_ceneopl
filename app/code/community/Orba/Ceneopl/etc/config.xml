@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Orba_Ceneopl>
-            <version>0.3.0</version>
+            <version>0.3.1</version>
         </Orba_Ceneopl>
     </modules>
     <frontend>
