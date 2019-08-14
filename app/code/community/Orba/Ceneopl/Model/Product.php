@@ -27,6 +27,8 @@ class Orba_Ceneopl_Model_Product extends Mage_Catalog_Model_Product {
                 ->addAttributeToSelect('ceneo_category_id')
                 ->addAttributeToSelect('price')
                 ->addAttributeToSelect('special_price')
+                ->addAttributeToSelect('special_from_date')
+                ->addAttributeToSelect('special_to_date')
                 ->addAttributeToSelect('weight')
                 ->addAttributeToSelect('name')
                 ->addAttributeToSelect('description')
